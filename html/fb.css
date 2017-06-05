@@ -1,0 +1,43 @@
+html {
+    font-family: "Courier New", Courier, monospace;
+}
+#header {
+    padding: 10px;
+    text-align: center;
+    border-bottom-style: solid;
+}
+#contentbody {
+    width: 800px;
+    margin: 0 auto;1
+    align: center;
+}
+#footer {
+    padding: 5px;
+    text-align: center;
+    border-top-style: solid;
+}
+.article_preview {
+    padding: 15px 5px 15px 5px;
+    border-bottom-style: solid;
+}
+.article {
+    padding: 15px 5px 15px 5px;
+}
+#author {
+    width: 100%;
+    text-align: right;
+    padding: 5px 5px 20px 5px;
+}
+#navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#navigation-back {
+    text-align: right;
+}
+#navigation-fwd {
+    text-align: left;
+}
