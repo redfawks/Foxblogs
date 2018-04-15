@@ -41,6 +41,7 @@ class configuration(object):
             'dir_root' : __config.get('settings', 'root_dir'),
             'dir_md' : __config.get('settings', 'md_dir'),
             'dir_html' : __config.get('settings', 'html_dir'),
+            'about' : __config.get('settings', 'about'),
             'preview_words' : __config.getint('settings', 'preview_words'),
             'prevs_per_page' : __config.getint('settings', 'previews_per_page')
         }
@@ -215,6 +216,11 @@ class article_handler(object):
     def get_article_list(self):
         return(self.articles_sorted)
 
+    def get_html_about(self):
+        about_article = article(self.settings, self.settings.settings['dir_root'] + '/' + self.settings.settings['about'])
+        about_page = fullpage(self.settings)
+        return(about_page.generate_full_article(about_article))
+
     def get_html_overview_pages(self):
         html_pages = list()
         single_page_articles = list()
@@ -259,6 +265,10 @@ class article_handler(object):
         return(html_pages_named)
     
     def write_html_files(self):
+        fullpath = self.settings.settings['dir_root'] + '/' + self.settings.settings['dir_html'] + '/' + 'about.html'
+        outfile = open(fullpath, 'w')
+        outfile.write(self.get_html_about())
+        outfile.close()
         for overview_html_file in self.get_html_overview_pages():
             fullpath = self.settings.settings['dir_root'] + '/' + self.settings.settings['dir_html'] + '/' + overview_html_file[0]
             outfile = open(fullpath, 'w')
