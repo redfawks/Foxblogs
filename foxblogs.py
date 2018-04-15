@@ -107,8 +107,16 @@ class fullpage(object):
                         <h1>{0}</h1>
                         <h3>{1}</h3>
                     </div>
-                    <div id="contentbody">\
         """.format(self.settings.content['heading'], self.settings.content['subheading'])
+        
+        self.__html_menu = """
+                    <div id="menu">
+                        <div class="menu_item-l"><a href='menu_0.html'>Home</a></div>
+                        <div class="menu_item-m"><a href='proj_0.html'>Projects</a></div>
+                        <div class="menu_item-r"><a href='about.html'>About</a></div>
+                    </div>
+                    <div id="contentbody">\
+        """
         
         self.__html_article = """
                         <div class="article">
@@ -118,7 +126,7 @@ class fullpage(object):
                         </div>\
                         <div id="author">{3}</div>\
         """
-        
+                
         self.__html_preview = """
                         <div class="article_preview">
                             {0}
@@ -163,6 +171,7 @@ class fullpage(object):
     def generate_full_summary(self, articles, page_id, link_fwd, link_back):
         fullhtml = self.__html_head
         fullhtml += self.__html_banner
+        fullhtml += self.__html_menu
         fullhtml += self.__generate_body_summary(articles)
         if link_fwd == True:
             link_fwd_html = "<a href=menu_{0}.html>&lt;- Newer Entries</a>".format(page_id-1)
@@ -180,6 +189,7 @@ class fullpage(object):
     def generate_full_article(self, article):
         fullhtml = self.__html_head
         fullhtml += self.__html_banner
+        fullhtml += self.__html_menu
         fullhtml += self.__generate_body_article(article)
         fullhtml += self.__html_footer
         return(textwrap.dedent(fullhtml))
@@ -260,6 +270,6 @@ class article_handler(object):
             outfile.write(article_html_file[1])
             outfile.close()
 
-settings = configuration('/home/iks/dev/foxblogs/dev/config.ini')
+settings = configuration('config.ini')
 articles = article_handler(settings)
 articles.write_html_files()
